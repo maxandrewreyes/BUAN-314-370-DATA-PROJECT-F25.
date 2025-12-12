@@ -32,11 +32,11 @@ write.csv(mh, "/Users/maxreyes/Desktop/tidy_dataset.csv", row.names = FALSE)
 #QUERY 5 How much time do different age groups spend on social media? 
 QUERY5 <-"SELECT
   CASE 
-     WHEN Age BETWEEN 16 AND 21 THEN '16-21'
-     WHEN Age BETWEEN 22 AND 27 THEN '22–27'
-     WHEN Age BETWEEN 28 AND 33 THEN '28–33'
-     WHEN Age BETWEEN 34 AND 39 THEN '34–39'
-     WHEN Age >= 40 THEN '40+'
+     WHEN Age BETWEEN 16 AND 22 THEN '16-22'
+     WHEN Age BETWEEN 23 AND 29 THEN '23–29'
+     WHEN Age BETWEEN 30 AND 36 THEN '30–36'
+     WHEN Age BETWEEN 37 AND 42 THEN '37–42'
+     WHEN Age >= 43 THEN '43+'
   END AS age_group,
   AVG(Daily_Screen_Time_Minutes) AS avg_time_spent
 FROM mh
@@ -48,11 +48,11 @@ sqldf(QUERY5)
 #Visualization 6
 mh_age <- mh %>%
   mutate(age_group = case_when(
-    Age >= 16 & Age <= 21 ~ "16-21",
-    Age >= 22 & Age <= 27 ~ "22-27",
-    Age >= 28 & Age <= 33 ~ "28-33",
-    Age >= 34 & Age <= 39 ~ "34-39",
-    Age >= 40            ~ "40+"
+    Age >= 16 & Age <= 22 ~ "16-22",
+    Age >= 23 & Age <= 29 ~ "23-29",
+    Age >= 30 & Age <= 36 ~ "30-36",
+    Age >= 37 & Age <= 42 ~ "37-42",
+    Age >= 43            ~ "43+"
   ))
 
 heat_df <- mh_age %>%
@@ -82,11 +82,11 @@ ggplot(heat_df, aes(x = age_group, y = Social_Media_Platform, fill = avg_minutes
 #Visualization 5 
 mh_age <- mh %>%
   mutate(age_group = case_when(
-    Age >= 16 & Age <= 21 ~ "16-21",
-    Age >= 22 & Age <= 27 ~ "22-27",
-    Age >= 28 & Age <= 33 ~ "28-33",
-    Age >= 34 & Age <= 39 ~ "34-39",
-    Age >= 40            ~ "40+"
+    Age >= 16 & Age <= 22 ~ "16-22",
+    Age >= 23 & Age <= 29 ~ "23-29",
+    Age >= 30 & Age <= 36 ~ "30-36",
+    Age >= 37 & Age <= 42 ~ "37-42",
+    Age >= 43            ~ "43+"
   ))
 
 
@@ -113,11 +113,11 @@ ggplot(freq_mh, aes(x = "", y = n, fill = age_group)) +
 #QUERY 9
 QUERY9 <- "SELECT
     CASE
-        WHEN Age BETWEEN 16 AND 21 THEN '16-21'
-        WHEN Age BETWEEN 22 AND 27 THEN '22-27'
-        WHEN Age BETWEEN 28 AND 33 THEN '28-33'
-        WHEN Age BETWEEN 34 AND 39 THEN '34-39'
-        WHEN Age >= 40 THEN '40+'
+        WHEN Age BETWEEN 16 AND 22 THEN '16-22'
+     WHEN Age BETWEEN 23 AND 29 THEN '23–29'
+     WHEN Age BETWEEN 30 AND 36 THEN '30–36'
+     WHEN Age BETWEEN 37 AND 42 THEN '37–42'
+     WHEN Age >= 43 THEN '43+'
     END AS age_group,
     Social_Media_Platform,
     COUNT(*) AS frequency
