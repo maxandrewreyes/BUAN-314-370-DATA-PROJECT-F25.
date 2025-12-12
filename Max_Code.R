@@ -33,16 +33,16 @@ write.csv(mh, "/Users/maxreyes/Desktop/tidy_dataset.csv", row.names = FALSE)
 QUERY5 <-"SELECT
   CASE 
      WHEN Age BETWEEN 16 AND 22 THEN '16-22'
-     WHEN Age BETWEEN 23 AND 29 THEN '23–29'
-     WHEN Age BETWEEN 30 AND 36 THEN '30–36'
-     WHEN Age BETWEEN 37 AND 42 THEN '37–42'
+     WHEN Age BETWEEN 23 AND 29 THEN '23-29'
+     WHEN Age BETWEEN 30 AND 36 THEN '30-36'
+     WHEN Age BETWEEN 37 AND 42 THEN '37-42'
      WHEN Age >= 43 THEN '43+'
   END AS age_group,
-  AVG(Daily_Screen_Time_Minutes) AS avg_time_spent
+  Social_Media_Platform,
+  AVG(Daily_Screen_Time_Minutes) AS avg_minutes
 FROM mh
-GROUP BY age_group
-ORDER BY age_group;
-"
+GROUP BY age_group, Social_Media_Platform
+ORDER BY age_group, Social_Media_Platform;"
 sqldf(QUERY5)
 
 #Visualization 6
